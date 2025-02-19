@@ -29,9 +29,6 @@ body {
   margin-bottom: 5rem;
 }
 
-
-
-
 .main-wrapper {
   display: flex;
   justify-content: space-around;
@@ -45,10 +42,6 @@ body {
   /* border: 2px dashed blue; */
 }
 
-
-
-
-
 .right-wrapper {
   width: 40%;
   display: flex;
@@ -58,7 +51,8 @@ body {
 
 
 
-
+/* _______________________
+_______________________ */
 
 
 /* post style */
@@ -96,7 +90,7 @@ body {
   font-Family: "Montserrat", sans-serif;
   font-weight: 300;
   font-size: 1.2rem;
-  line-height: 1rem;
+  line-height: 1.3rem;
   text-align: start;
 }
 
@@ -119,6 +113,11 @@ body {
 }
 
 
+
+
+
+/* _______________________
+_______________________ */
 
 /* form style */
 form {
