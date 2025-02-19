@@ -61,18 +61,17 @@ export default function BlogPost() {
     // stato dell'input inserimento post
     const [newPost, setNewPost] = useState(initialPostData);
 
-    // funzione per l'aggiunta di un nuovo post da input
+
+
+
+    // !! funzione di gestione INVIO INTERO FORM e quindi per l'aggiunta di un nuovo post alla lista
     const addPost = e => {
         e.preventDefault();
-
-
         // crea nuovo oggetto post
         const newPostObject = {
             id: posts.length === 0 ? 1 : posts[posts.length - 1].id + 1,
             ...newPost
         };
-
-
         // aggiungi il nuovo post alla lista
         const updatedPosts = [...posts, newPostObject];
         setPosts(updatedPosts);
@@ -81,19 +80,19 @@ export default function BlogPost() {
     }
 
 
-    // funzione per la modifica dei dati nel form
+
+    // !! funzione per la modifica dei dati nel form
     function handleFormData(e) {
         const value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
-
         setNewPost((currentNewPost) => ({
             ...currentNewPost,
-            [e.target.name]: e.target.value,
+            [e.target.name]: value,
         }));
     }
 
 
 
-    // funzione per la rimozione del post
+    // !! funzione per la rimozione del post
     const removePost = (id) => {
         const updatedPosts = posts.filter((post) => {
             return post.id !== id
