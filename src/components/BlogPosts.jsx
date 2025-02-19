@@ -44,6 +44,8 @@ const blogPosts = [
     }
 ];
 
+
+
 const initialPostData = {
     title: "",
     author: "",
@@ -53,15 +55,33 @@ const initialPostData = {
 };
 
 
-
 export default function BlogPost() {
 
     // stato della lista posts 
     const [posts, setPosts] = useState(blogPosts)
-    // stato dell'input inserimento post
-    const [newPost, setNewPost] = useState(initialPostData);
+    // stato dell'input inserimento in form
+    // const [newPost, setNewPost] = useState(initialPostData);
+    const [formData, setFormData] = useState(initialPostData);
 
 
+
+
+
+    // !! funzione per la modifica dei dati nel form
+    function handleFormData(e) {
+        const value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
+
+        // LOGGA PER DEBUG
+        console.log("Evento:", e);  // Vedi l'evento completo
+        console.log("Target:", e.target);  // Vedi l'elemento che ha scatenato l'evento
+        console.log("Nome del campo:", e.target.name);  // Il name dell'input
+        console.log("Valore del campo:", e.target.value);  // Il valore attuale
+
+        setFormData((currentFormData) => ({
+            ...currentFormData,
+            [e.target.name]: value
+        }));
+    }
 
 
     // !! funzione di gestione INVIO INTERO FORM e quindi per l'aggiunta di un nuovo post alla lista
@@ -70,24 +90,13 @@ export default function BlogPost() {
         // crea nuovo oggetto post
         const newPostObject = {
             id: posts.length === 0 ? 1 : posts[posts.length - 1].id + 1,
-            ...newPost
+            ...formData
         };
         // aggiungi il nuovo post alla lista
         const updatedPosts = [...posts, newPostObject];
         setPosts(updatedPosts);
-        // azzeriamo il valore di newPost in input
-        setNewPost(initialPostData);
-    }
-
-
-
-    // !! funzione per la modifica dei dati nel form
-    function handleFormData(e) {
-        const value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
-        setNewPost((currentNewPost) => ({
-            ...currentNewPost,
-            [e.target.name]: value,
-        }));
+        // azzeriamo i valori del form
+        setFormData(initialPostData);
     }
 
 
@@ -154,7 +163,7 @@ export default function BlogPost() {
                             <input
                                 type="text"
                                 name="title"
-                                value={newPost.title}
+                                value={formData.title}
                                 onChange={handleFormData}
                                 placeholder="Titolo Post"
                             />
@@ -162,7 +171,7 @@ export default function BlogPost() {
                             <input
                                 type="text"
                                 name="author"
-                                value={newPost.author}
+                                value={formData.author}
                                 onChange={handleFormData}
                                 placeholder="Autore"
                             />
@@ -172,7 +181,7 @@ export default function BlogPost() {
                             <input
                                 type="text"
                                 name="category"
-                                value={newPost.category}
+                                value={formData.category}
                                 onChange={handleFormData}
                                 placeholder="Categoria"
                             />
@@ -180,8 +189,8 @@ export default function BlogPost() {
                                 <label htmlFor="available">Richiede Magia</label>
                                 <input
                                     type="checkbox"
-                                    name="available"
-                                    checked={newPost.available}
+                                    name="magic"
+                                    checked={formData.available}
                                     onChange={handleFormData}
                                     id="available"
                                 />
@@ -193,7 +202,7 @@ export default function BlogPost() {
                         <textarea
                             type="text"
                             name="content"
-                            value={newPost.content}
+                            value={formData.content}
                             onChange={handleFormData}
                             onKeyDown={handleKeyDown}
                         />
