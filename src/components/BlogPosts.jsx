@@ -3,34 +3,56 @@ import { useState } from "react";
 const blogPosts = [
     {
         id: 1,
-        title: "Zuppa di Nebbia e Luci"
+        title: "Zuppa di Nebbia e Luci",
+        author: "Luca Ferri",
+        content: "Mescola la nebbia delle prime ore del mattino con un raggio di luce solare che fluttua nell'aria. Lascia che la sostanza diventi un sogno liquido, dove il caldo dell’inverno incontra la freschezza della primavera. Servi la zuppa in un piatto di silenzio, decorato con frammenti di stelle cadenti.",
+        category: "Zuppe surreali"
     },
     {
         id: 2,
-        title: "Risotto di Stelle e Ombre"
+        title: "Risotto di Stelle e Ombre",
+        author: "Marta Bianchi",
+        content: "Cuoci i granelli di stella nell'oscurità di una notte senza luna. L’ombra di un sogno infranto scivola sopra il riso, avvolgendo ogni chicco di una misteriosa malinconia. Una volta pronto, lascia che le ombre si mescolino alla luce della tua tavola, come se il cielo fosse stato raccolto in un piatto.",
+        category: "Risotti onirici"
     },
     {
         id: 3,
-        title: "Insalata di Venti e Fiori di Luce"
+        title: "Insalata di Venti e Fiori di Luce",
+        author: "Giovanni Rossi",
+        content: "Fai danzare i venti tra le foglie di un albero che non esiste, raccogli i fiori di luce che crescono nel vuoto e mescolali in un piatto che non ha confini. Ogni boccone è una carezza del vento che si scompone in colori e ombre, come un ricordo che si dissolve nell'aria.",
+        category: "Contorni immaginari"
     },
     {
         id: 4,
-        title: "Torta di Nuvole e Polvere di Sogno"
+        title: "Torta di Nuvole e Polvere di Sogno",
+        author: "Alessandra Verdi",
+        content: "Fondi insieme le nuvole più leggere, che si dissolvono alla prima carezza, con la polvere di sogni lontani. Lascia che la torta lieviti come una nuvola di passaggio, pronta a svanire non appena tocca il piatto. Una volta cotta, cospargila di sogni in polvere, per un effetto che evoca l’immensità di un universo senza tempo.",
+        category: "Dolci surreali"
     },
     {
         id: 5,
-        title: "Pasta al Raggio di Luna e Fumo di Primavera"
+        title: "Pasta al Raggio di Luna e Fumo di Primavera",
+        author: "Federico Lupo",
+        content: "Lascia che la pasta scivoli tra i raggi di luna che si spezzano come cristalli nel cielo. Ogni filo è avvolto nel fumo di una primavera che non è mai arrivata. Il piatto si trasforma mentre lo guardi, sfumando tra il caldo del giorno e il fresco della notte, in un eterno istante di perfezione.",
+        category: "Primi onirici"
     }
 ];
 
+const initialFormData = {
+    name: "",
+    image: "",
+    description: "",
+    price: 0,
+    available: false,
+}
 
 
 export default function BlogPost() {
 
-    // stato della lista posts
+    // stato della lista posts 
     const [posts, setPosts] = useState(blogPosts)
     // stato dell'input inserimento post
-    const [newPost, setNewPost] = useState('');
+    const [newPost, setNewPost] = useState(initialFormData);
 
     // funzione per l'aggiunta di un nuovo post da input
     const addPost = e => {
@@ -40,7 +62,7 @@ export default function BlogPost() {
         // crea nuovo oggetto post
         const newPostObject = {
             id: posts.length === 0 ? 1 : posts[posts.length - 1].id + 1,
-            title: newPost
+            ...newPost
         };
 
 
@@ -48,7 +70,17 @@ export default function BlogPost() {
         const updatedPosts = [...posts, newPostObject];
         setPosts(updatedPosts);
         // azzeriamo il valore di newPost in input
-        setNewPost('');
+        setNewPost(initialFormData);
+    }
+
+
+    // funzione per la modifica dei dati nel form
+    const handleFormData = (e) => {
+        const { name, value } = e.target;
+        setNewPost(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
     }
 
 
@@ -80,12 +112,23 @@ export default function BlogPost() {
                 {posts.length === 0 ? <p className="empty-message">La lista di ricette è vuota</p> :
                     // lista post
                     <ul className="posts-list">
-                        {posts.map((post, i) => (
+                        {posts.map((post) => (
+
                             <li className="post" key={post.id}>
-                                <p>{post.title}</p>
-                                <button className="remove" onClick={() => removePost(post.id)}>
-                                    X
-                                </button>
+                                <div className="post-upper-wrapper">
+                                    <h3>{post.title}</h3>
+                                    <button className="remove" onClick={() => removePost(post.id)}>
+                                        X
+                                    </button>
+                                </div>
+                                <p className="content">{post.content}</p>
+                                <div className="post-lower-wrapper">
+                                    <span>{post.author}</span>
+                                    <span className="category">{post.category}</span>
+
+                                </div>
+
+
                             </li>
                         ))}
                     </ul>
@@ -96,8 +139,51 @@ export default function BlogPost() {
                 <div className="right-wrapper">
                     <p className="textarea-caption" >AGGIUNGI UNA RICETTA</p>
                     <form onSubmit={addPost}>
-                        <textarea type="text" value={newPost} onKeyDown={handleKeyDown}
-                            onChange={event => { setNewPost(event.target.value) }}
+                        <div className="upper-inputs">
+                            <input
+                                type="text"
+                                name="title"
+                                value={newPost.title}
+                                onChange={handleFormData}
+                                placeholder="Titolo Post"
+                            />
+
+                            <input
+                                type="text"
+                                name="author"
+                                value={newPost.author}
+                                onChange={handleFormData}
+                                placeholder="Autore"
+                            />
+
+                        </div>
+                        <div className="lower-inputs">
+                            <input
+                                type="text"
+                                name="category"
+                                value={newPost.category}
+                                onChange={handleFormData}
+                                placeholder="Categoria"
+                            />
+
+                            <label htmlFor="available">Disponibile</label>
+                            <input
+                                type="checkbox"
+                                name="available"
+                                checked={newPost.available}
+                                onChange={handleFormData}
+                                id="available"
+                            />
+
+
+                        </div>
+
+                        <textarea
+                            type="text"
+                            name="content"
+                            value={newPost.content}
+                            onChange={handleFormData}
+                            onKeyDown={handleKeyDown}
                         />
                         <button>Invia</button>
                     </form >

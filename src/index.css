@@ -46,12 +46,78 @@ body {
 }
 
 
+
+
+
 .right-wrapper {
   width: 40%;
   display: flex;
   flex-direction: column;
   /* border: 2px dashed rgb(118, 255, 105); */
 }
+
+
+
+
+
+
+/* post style */
+.post {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  list-style: none;
+  border-bottom: 1px dashed black;
+}
+
+
+.post-upper-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  font-family: "Montserrat", sans-serif;
+}
+
+/* lower wrapper */
+.post-lower-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-family: "Montserrat", sans-serif;
+}
+
+
+/* post content style */
+.post p {
+  font-Family: "Montserrat", sans-serif;
+  font-weight: 300;
+  font-size: 1.2rem;
+  line-height: 1rem;
+  text-align: start;
+}
+
+/* remove button */
+.remove {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  font-weight: 700;
+}
+
+
+
+
+.empty-message {
+  font-Family: "Montserrat", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 5rem;
+}
+
 
 
 /* form style */
@@ -101,46 +167,4 @@ form button {
 form button:hover {
   background-color: rgb(58, 58, 58);
   color: white;
-}
-
-
-
-
-
-
-
-/* post style */
-.post {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 1rem;
-  list-style: none;
-  border-bottom: 1px dashed black;
-}
-
-
-/* post content style */
-.post p {
-  font-Family: "Montserrat", sans-serif;
-  font-weight: 300;
-  font-size: 1.2rem;
-  line-height: 1rem;
-}
-
-/* remove button */
-.remove {
-  cursor: pointer;
-  background-color: transparent;
-  border: none;
-  font-weight: 700;
-}
-
-
-
-
-.empty-message {
-  font-Family: "Montserrat", sans-serif;
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-top: 5rem;
 }
