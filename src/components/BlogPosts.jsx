@@ -44,7 +44,7 @@ const blogPosts = [
     }
 ];
 
-const initialFormData = {
+const initialPostData = {
     title: "",
     author: "",
     content: "",
@@ -59,7 +59,7 @@ export default function BlogPost() {
     // stato della lista posts 
     const [posts, setPosts] = useState(blogPosts)
     // stato dell'input inserimento post
-    const [newPost, setNewPost] = useState(initialFormData);
+    const [newPost, setNewPost] = useState(initialPostData);
 
     // funzione per l'aggiunta di un nuovo post da input
     const addPost = e => {
@@ -77,7 +77,7 @@ export default function BlogPost() {
         const updatedPosts = [...posts, newPostObject];
         setPosts(updatedPosts);
         // azzeriamo il valore di newPost in input
-        setNewPost(initialFormData);
+        setNewPost(initialPostData);
     }
 
 
@@ -87,7 +87,7 @@ export default function BlogPost() {
 
         setNewPost((currentNewPost) => ({
             ...currentNewPost,
-            [e.target.name]: value,
+            [e.target.name]: e.target.value,
         }));
     }
 
