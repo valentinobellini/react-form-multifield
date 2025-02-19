@@ -67,7 +67,7 @@ export default function BlogPost() {
 
 
 
-    // !! funzione per la modifica dei dati nel form
+    // !! funzione di gestione evento MODIFICA DATI nel form
     function handleFormData(e) {
         const value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
 
@@ -84,7 +84,7 @@ export default function BlogPost() {
     }
 
 
-    // !! funzione di gestione INVIO INTERO FORM e quindi per l'aggiunta di un nuovo post alla lista
+    // !! funzione di gestione evento INVIO INTERO FORM (onSubmit) e quindi per l'aggiunta di un nuovo post alla lista
     const addPost = e => {
         e.preventDefault();
         // crea nuovo oggetto post
@@ -95,7 +95,7 @@ export default function BlogPost() {
         // aggiungi il nuovo post alla lista
         const updatedPosts = [...posts, newPostObject];
         setPosts(updatedPosts);
-        // azzeriamo i valori del form
+        // azzera i valori del form
         setFormData(initialPostData);
     }
 
@@ -158,6 +158,7 @@ export default function BlogPost() {
                 {/* form per aggiunta post */}
                 <div className="right-wrapper">
                     <p className="textarea-caption" >AGGIUNGI UNA RICETTA</p>
+                    {/* on submit */}
                     <form onSubmit={addPost}>
                         <div className="upper-inputs">
                             <input
