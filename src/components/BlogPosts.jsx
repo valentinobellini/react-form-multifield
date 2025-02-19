@@ -37,7 +37,7 @@ const blogPosts = [
     {
         id: 5,
         title: "Pasta al Raggio di Luna e Fumo di Primavera",
-        author: "Federico Lupo",
+        author: "Simone Icardi",
         content: "Lascia che la pasta scivoli tra i raggi di luna che si spezzano come cristalli nel cielo. Ogni filo è avvolto nel fumo di una primavera che non è mai arrivata. Il piatto si trasforma mentre lo guardi, sfumando tra il caldo del giorno e il fresco della notte, in un eterno istante di perfezione.",
         category: "Primi onirici",
         magic: false
@@ -125,7 +125,7 @@ export default function BlogPost() {
                             <li className="post" key={post.id}>
                                 <div className="post-upper-wrapper">
                                     <h3>
-                                        {post.title} ({post.magic ? "Rchiede magia" : "Non richiede magia"})
+                                        {post.title} ({post.magic ? "Richiede magia" : "Non richiede magia"})
                                     </h3>
 
                                     <button className="remove" onClick={() => removePost(post.id)}>
