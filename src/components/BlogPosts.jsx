@@ -39,12 +39,13 @@ const blogPosts = [
 ];
 
 const initialFormData = {
-    name: "",
-    image: "",
-    description: "",
-    price: 0,
-    available: false,
-}
+    title: "",
+    author: "",
+    content: "",
+    category: "",
+    available: false
+};
+
 
 
 export default function BlogPost() {
@@ -75,13 +76,15 @@ export default function BlogPost() {
 
 
     // funzione per la modifica dei dati nel form
-    const handleFormData = (e) => {
-        const { name, value } = e.target;
-        setNewPost(prevState => ({
-            ...prevState,
-            [name]: value
+    function handleFormData(e) {
+        const value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
+
+        setNewPost((currentNewPost) => ({
+            ...currentNewPost,
+            [e.target.name]: value,
         }));
     }
+
 
 
     // funzione per la rimozione del post
@@ -165,15 +168,16 @@ export default function BlogPost() {
                                 onChange={handleFormData}
                                 placeholder="Categoria"
                             />
-
-                            <label htmlFor="available">Disponibile</label>
-                            <input
-                                type="checkbox"
-                                name="available"
-                                checked={newPost.available}
-                                onChange={handleFormData}
-                                id="available"
-                            />
+                            <div className="available">
+                                <label htmlFor="available">Disponibile</label>
+                                <input
+                                    type="checkbox"
+                                    name="available"
+                                    checked={newPost.available}
+                                    onChange={handleFormData}
+                                    id="available"
+                                />
+                            </div>
 
 
                         </div>
